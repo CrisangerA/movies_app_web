@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+  min-height: 30vh;
+}
+
+.searchbar {
+  position: relative;
+  left: -100%;
+  width: 100%;
+  min-height: 30vh;
+  background-color: #5ca4d4; /* secondary */
+  background: linear-gradient(to right, #5ca4d4 0%, #5484b4 100%);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.7s ease-out;
+}
+.containerIn {
+  left: 0;
+}
+
+.input {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  min-width: 450px;
+  border: none;
+  border-radius: 25px;
+}
+
+.input:focus {
+  border: 1px solid #5ca4d4;
+  outline: none;
+}

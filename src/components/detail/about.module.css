@@ -1,0 +1,25 @@
+.container {
+  padding-top: 1rem;
+}
+
+.animated {
+  opacity: 0;
+  transition: 0.7s ease-out;
+  position: relative;
+  right: -100%;
+}
+.animatedIn {
+  opacity: 1;
+  right: 0;
+}
+
+.title {
+  font-size: 3em;
+  margin-bottom: 0;
+}
+
+.paragraph {
+  margin-top: 0;
+  font-size: 2em;
+  font-weight: normal;
+}
