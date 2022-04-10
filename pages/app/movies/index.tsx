@@ -3,6 +3,7 @@ import { Recommended, Searchbar } from '@components/home';
 import { movieService, Movie } from '@modules/movies';
 // types
 import type { NextPage } from 'next';
+import { LogoutButton } from '@components/login';
 
 interface HomeProps {
   discover: Movie[];
@@ -10,11 +11,15 @@ interface HomeProps {
 }
 
 const Home: NextPage<HomeProps> = ({ discover = [], topRated = [] }) => (
-  <Page title='Movies App' description='The most complete website to know about your favorite movies'>
+  <Page
+    title='Movies App'
+    description='The most complete website to know about your favorite movies'
+  >
     <Searchbar />
     <Recommended movies={discover} />
     <Recommended movies={topRated} />
     <BottomNavbar />
+    <LogoutButton />
   </Page>
 );
 export async function getStaticProps() {

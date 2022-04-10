@@ -1,4 +1,7 @@
 const SCREEN_ROUTES = {
+  auth: {
+    login: '/login',
+  },
   movies: {
     list: '/app/movies',
     detail: (movieId: string) => `/app/movies/${movieId}`,

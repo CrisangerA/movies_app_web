@@ -1,0 +1,21 @@
+.container {
+  position: absolute;
+  z-index: 999;
+  right: 0;
+  top: 0;
+}
+
+.child {
+  padding-right: 1.5rem;
+  padding-top: 1.5rem;
+  text-align: center;
+  color: transparent;
+  cursor: pointer;
+}
+.child p {
+  margin: 0;
+}
+
+.child:hover {
+  color: black;
+}

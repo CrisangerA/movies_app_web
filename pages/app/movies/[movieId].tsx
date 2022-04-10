@@ -1,5 +1,6 @@
 import { About, Actors, Header } from '@components/detail';
 import { BottomNavbar, Page } from '@components/index';
+import { LogoutButton } from '@components/login';
 import { Actor, Movie, movieService } from '@modules/movies';
 import type { NextPage, NextPageContext } from 'next';
 import styles from './movieid.module.css';
@@ -10,7 +11,10 @@ interface DetailsProps {
 }
 
 const Details: NextPage<DetailsProps> = (props) => (
-  <Page title={`Movies App | ${props.movie.title}`} description={`${props.movie.title}  ${props.movie.tagline}`}>
+  <Page
+    title={`Movies App | ${props.movie.title}`}
+    description={`${props.movie.title}  ${props.movie.tagline}`}
+  >
     <div className={styles.container}>
       <div className={styles.child}>
         <Header backdrop_path={props.movie.backdrop_path} title={props.movie.title} />
@@ -19,6 +23,7 @@ const Details: NextPage<DetailsProps> = (props) => (
       </div>
     </div>
     <BottomNavbar />
+    <LogoutButton />
   </Page>
 );
 
