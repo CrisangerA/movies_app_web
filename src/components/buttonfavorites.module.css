@@ -1,0 +1,22 @@
+.container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 15px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  box-shadow: 0px 3px 5px 5px #2c3c4c;
+  transition: all 0.5s linear;
+}
+.container:hover {
+  opacity: 0.7;
+}
+
+.containerHeart {
+  background-color: red;
+}
+
+.containerStar {
+  background-color: yellow;
+}

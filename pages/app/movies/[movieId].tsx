@@ -17,7 +17,7 @@ const Details: NextPage<DetailsProps> = (props) => (
   >
     <div className={styles.container}>
       <div className={styles.child}>
-        <Header backdrop_path={props.movie.backdrop_path} title={props.movie.title} />
+        <Header {...props.movie} />
         <About {...props.movie} />
         <Actors actors={props.actors} />
       </div>

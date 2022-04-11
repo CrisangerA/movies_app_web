@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import type { AppProps } from 'next/app';
 import '../styles/globals.css';
 import { AuthProvider } from 'src/context/AuthContext';
+import { FavoritesProvider } from 'src/context/FavoritesContext';
 
 const queryClient = new QueryClient();
 
@@ -13,7 +14,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
       <AuthProvider>
-        <Component {...pageProps} />
+        <FavoritesProvider>
+          <Component {...pageProps} />
+        </FavoritesProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

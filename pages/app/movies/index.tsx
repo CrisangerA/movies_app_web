@@ -1,9 +1,9 @@
 import { BottomNavbar, Page } from '@components/index';
 import { Recommended, Searchbar } from '@components/home';
 import { movieService, Movie } from '@modules/movies';
+import { LogoutButton } from '@components/login';
 // types
 import type { NextPage } from 'next';
-import { LogoutButton } from '@components/login';
 
 interface HomeProps {
   discover: Movie[];
