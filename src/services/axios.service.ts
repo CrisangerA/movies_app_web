@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable class-methods-use-this */
 import axios, { AxiosResponse, AxiosError } from 'axios';
-import MOVIES_API from '@modules/shared/api.routes';
+import MOVIES_API from '@shared/api.routes';
 
 class AxiosService {
   API_KEY = 'bdeeba2f37e3b915bba65a658be1b1d9';
@@ -28,7 +28,8 @@ class AxiosService {
     if (err.response?.status === 401) error.message = 'Unauthorized';
     if (err.response?.status === 403) error.message = 'Forbiden';
     if (err.response?.status === 500) error.message = 'Internal server error';
-    if (typeof err.response?.data === 'string' && err.response.data !== '') error.message = err.response.data;
+    if (typeof err.response?.data === 'string' && err.response.data !== '')
+      error.message = err.response.data;
 
     if (typeof err.response?.data?.message === 'string' && err.response.data.message !== '') {
       error.message = err.response.data.message;

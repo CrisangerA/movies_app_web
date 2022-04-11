@@ -1,7 +1,6 @@
-import { BottomNavbar, Page } from '@components/index';
-import { Recommended, Searchbar } from '@components/home';
-import { movieService, Movie } from '@modules/movies';
-import { LogoutButton } from '@components/login';
+import { DashboardLayout, Dashboard } from '@components/index';
+import { Movie } from '@models/index';
+import movieService from '@services/movie.service';
 // types
 import type { NextPage } from 'next';
 
@@ -11,16 +10,12 @@ interface HomeProps {
 }
 
 const Home: NextPage<HomeProps> = ({ discover = [], topRated = [] }) => (
-  <Page
+  <DashboardLayout
     title='Movies App'
     description='The most complete website to know about your favorite movies'
   >
-    <Searchbar />
-    <Recommended movies={discover} />
-    <Recommended movies={topRated} />
-    <BottomNavbar />
-    <LogoutButton />
-  </Page>
+    <Dashboard discover={discover} topRated={topRated} />
+  </DashboardLayout>
 );
 export async function getStaticProps() {
   const discover = await movieService.getRecomended();

@@ -1,18 +1,14 @@
-import { FavoriteList } from '@components/favorites';
-import { BottomNavbar, Page } from '@components/index';
-import { LogoutButton } from '@components/login';
+import { DashboardLayout, FavoriteList } from '@components/index';
 // types
 import type { NextPage } from 'next';
 
 const Favorites: NextPage = () => (
-  <Page
-    title='Movies App'
+  <DashboardLayout
+    title='Movies App | My Favorites'
     description='The most complete website to know about your favorite movies'
   >
     <FavoriteList />
-    <BottomNavbar />
-    <LogoutButton />
-  </Page>
+  </DashboardLayout>
 );
 
 export default Favorites;

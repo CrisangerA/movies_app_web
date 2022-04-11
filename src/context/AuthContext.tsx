@@ -2,7 +2,7 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable @typescript-eslint/no-empty-function */
-import SCREEN_ROUTES from '@modules/shared/screen.routes';
+import SCREEN_ROUTES from '@shared/screen.routes';
 import { useRouter } from 'next/router';
 import { createContext, FC, useEffect, useState } from 'react';
 import { whiteListEmails, delay } from 'src/shared/utils';

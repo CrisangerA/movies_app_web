@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
-import MOVIES_API from '@modules/shared/api.routes';
+import MOVIES_API from '@shared/api.routes';
 import axiosService from 'src/services/axios.service';
-import { ActorAPI, Movie, MovieAPI } from './domain/movie.model';
+import { ActorAPI, Movie, MovieAPI } from '@models/index';
 
 class MovieService {
   getRecomended = () => axiosService.get<MovieAPI>(MOVIES_API.discover);

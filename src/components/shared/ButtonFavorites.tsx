@@ -8,7 +8,6 @@ const ButtonFavorites: FC<{ id: string }> = ({ id }) => {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const selected = isFavorite(id);
   return (
-    // <div className={styles.container}>
     <button type='button' onClick={() => (selected ? removeFavorite(id) : addFavorite(id))}>
       <div
         className={`${styles.container} ${selected ? styles.containerHeart : styles.containerStar}`}
@@ -21,7 +20,6 @@ const ButtonFavorites: FC<{ id: string }> = ({ id }) => {
         />
       </div>
     </button>
-    // </div>
   );
 };
 

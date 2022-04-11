@@ -1,4 +1,4 @@
-import SCREEN_ROUTES from '@modules/shared/screen.routes';
+import SCREEN_ROUTES from '@shared/screen.routes';
 
 function Page() {
   return null;

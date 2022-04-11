@@ -1,14 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
-import ButtonFavorites from '@components/ButtonFavorites';
-import SCREEN_ROUTES from '@modules/shared/screen.routes';
-import { Movie } from '../domain/movie.model';
+import { ButtonFavorites } from '@components/index';
+import { Movie } from '@models/index';
+import SCREEN_ROUTES from '@shared/screen.routes';
 import styles from './movieCard.module.css';
 
 const MovieCard: FC<Movie> = (props) => {
   const { id, title, poster_path, vote_average } = props;
-  // const { id, title, poster_path, vote_average } = props as Movie;
   return (
     <div className={styles.container}>
       <Link href={SCREEN_ROUTES.movies.detail(id)} passHref>

@@ -1,6 +1,6 @@
-import SCREEN_ROUTES from '@modules/shared/screen.routes';
 import Image from 'next/image';
 import Link from 'next/link';
+import SCREEN_ROUTES from '@shared/screen.routes';
 import styles from './bottomNavbar.module.css';
 
 const BottomNavbar = () => (
@@ -14,7 +14,12 @@ const BottomNavbar = () => (
       </Link>
       <Link href={SCREEN_ROUTES.movies.favorites} passHref>
         <div className={styles.icon}>
-          <Image src='/static/logos/icon-favorites.svg' alt='Icon from home' width={40} height={40} />
+          <Image
+            src='/static/logos/icon-favorites.svg'
+            alt='Icon from home'
+            width={40}
+            height={40}
+          />
           <p>Favorites</p>
         </div>
       </Link>

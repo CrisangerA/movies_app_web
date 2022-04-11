@@ -1,7 +1,6 @@
-import { About, Actors, Header } from '@components/detail';
-import { BottomNavbar, Page } from '@components/index';
-import { LogoutButton } from '@components/login';
-import { Actor, Movie, movieService } from '@modules/movies';
+import { DashboardLayout, About, Actors, Header } from '@components/index';
+import { Movie, Actor } from '@models/index';
+import movieService from '@services/movie.service';
 import type { NextPage, NextPageContext } from 'next';
 import styles from './movieid.module.css';
 
@@ -11,7 +10,7 @@ interface DetailsProps {
 }
 
 const Details: NextPage<DetailsProps> = (props) => (
-  <Page
+  <DashboardLayout
     title={`Movies App | ${props.movie.title}`}
     description={`${props.movie.title}  ${props.movie.tagline}`}
   >
@@ -22,9 +21,7 @@ const Details: NextPage<DetailsProps> = (props) => (
         <Actors actors={props.actors} />
       </div>
     </div>
-    <BottomNavbar />
-    <LogoutButton />
-  </Page>
+  </DashboardLayout>
 );
 
 export async function getServerSideProps(context: NextPageContext) {

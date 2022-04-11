@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import type { AppProps } from 'next/app';
-import '../styles/globals.css';
 import { AuthProvider } from 'src/context/AuthContext';
 import { FavoritesProvider } from 'src/context/FavoritesContext';
+import '../styles/globals.css';
 
 const queryClient = new QueryClient();
 

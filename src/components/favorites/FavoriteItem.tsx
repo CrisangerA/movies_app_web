@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { useQuery } from 'react-query';
-import { Movie, MovieCard, movieService } from '@modules/movies';
+import { MovieCard } from '@components/index';
+import { Movie } from '@models/movie.model';
+import movieService from '@services/movie.service';
 
 const FavoriteItem: FC<{ id: string }> = ({ id }) => {
   const { isLoading, data } = useQuery(`favorite-${id}`, () => movieService.getMovie(id));

@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
-import { Movie, MovieCard } from '@modules/movies';
 import { FC, useEffect, useState } from 'react';
+import { Movie } from '@models/index';
+import MovieCard from '@components/shared/MovieCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './recomended.module.css';
 // Import Swiper styles
