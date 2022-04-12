@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useQuery } from 'react-query';
-import { MovieCard } from '@components/index';
+import { MovieCard } from '@components/shared';
 import { Movie } from '@models/movie.model';
 import movieService from '@services/movie.service';
 

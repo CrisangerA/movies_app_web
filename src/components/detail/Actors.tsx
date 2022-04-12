@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import Image from 'next/image';
 import { FC } from 'react';
-import { Actor } from '@modules/movies';
+import { Actor } from '@models/index';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './about.module.css';
 // Import Swiper styles

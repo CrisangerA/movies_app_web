@@ -4,13 +4,15 @@ import axiosService from 'src/services/axios.service';
 import { ActorAPI, Movie, MovieAPI } from '@models/index';
 
 class MovieService {
-  getRecomended = () => axiosService.get<MovieAPI>(MOVIES_API.discover);
+  getRecomended = (query?: string) => axiosService.get<MovieAPI>(MOVIES_API.discover, query);
 
-  getTopRated = () => axiosService.get<MovieAPI>(MOVIES_API.movie('').topRated);
+  getTopRated = (query?: string) => axiosService.get<MovieAPI>(MOVIES_API.movie('').topRated, query);
 
   getActors = (movieId: string) => axiosService.get<ActorAPI>(MOVIES_API.movie(movieId).actors);
 
   getMovie = (movieId: string) => axiosService.get<Movie>(MOVIES_API.movie(movieId).details);
+
+  searchMovie = (query: string) => axiosService.get<MovieAPI>(MOVIES_API.movie().search, query);
 }
 const movieService = new MovieService();
 export default movieService;

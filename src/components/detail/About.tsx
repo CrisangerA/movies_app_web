@@ -1,4 +1,4 @@
-import { Movie } from '@modules/movies';
+import { Movie } from '@models/index';
 import { FC, useEffect, useState } from 'react';
 // import { Image } from '..';
 import styles from './about.module.css';

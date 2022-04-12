@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { ButtonFavorites } from '@components/index';
-import { Movie } from '@modules/movies';
+// import { ButtonFavorites } from '@components/index';
+import { Movie } from '@models/index';
 import Image from 'next/image';
 import { FC, useEffect, useState } from 'react';
+import { ButtonFavorites } from '@components/shared';
 import styles from './header.module.css';
 
 const About: FC<Movie> = (props) => {

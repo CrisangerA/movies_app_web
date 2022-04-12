@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import Image from 'next/image';
 import { FC } from 'react';
 import useFavorites from '@hooks/useFavorites';
@@ -9,9 +8,7 @@ const ButtonFavorites: FC<{ id: string }> = ({ id }) => {
   const selected = isFavorite(id);
   return (
     <button type='button' onClick={() => (selected ? removeFavorite(id) : addFavorite(id))}>
-      <div
-        className={`${styles.container} ${selected ? styles.containerHeart : styles.containerStar}`}
-      >
+      <div className={`${styles.container} ${selected ? styles.containerHeart : styles.containerStar}`}>
         <Image
           alt='Logo add favorite'
           src={selected ? '/static/logos/icon-heart.webp' : '/static/logos/icon-star.png'}

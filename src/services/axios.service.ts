@@ -10,7 +10,7 @@ import MOVIES_API from '@shared/api.routes';
 class AxiosService {
   API_KEY = 'bdeeba2f37e3b915bba65a658be1b1d9';
 
-  getRoute = (route: string) => `${MOVIES_API.root}${route}?api_key=${this.API_KEY}`;
+  getRoute = (route: string, query = '') => `${MOVIES_API.root}${route}?api_key=${this.API_KEY}${query}`;
 
   headers = () => ({
     'content-type': 'application/json',
@@ -28,8 +28,9 @@ class AxiosService {
     if (err.response?.status === 401) error.message = 'Unauthorized';
     if (err.response?.status === 403) error.message = 'Forbiden';
     if (err.response?.status === 500) error.message = 'Internal server error';
-    if (typeof err.response?.data === 'string' && err.response.data !== '')
+    if (typeof err.response?.data === 'string' && err.response.data !== '') {
       error.message = err.response.data;
+    }
 
     if (typeof err.response?.data?.message === 'string' && err.response.data.message !== '') {
       error.message = err.response.data.message;
@@ -39,10 +40,10 @@ class AxiosService {
     reject(error);
   };
 
-  get<T>(route: string): Promise<T> {
+  get<T>(route: string, query?: string): Promise<T> {
     return new Promise((resolve, reject) =>
       axios
-        .get(this.getRoute(route), { headers: this.headers() })
+        .get(this.getRoute(route, query), { headers: this.headers() })
         .then(this.successCallback(resolve), this.rejectCallback(reject))
     );
   }

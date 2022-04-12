@@ -14,15 +14,6 @@
     ],
     "react/forbid-prop-types": "off",
     "react/require-default-props": "off",
-    "react/jsx-props-no-spreading": [
-      2,
-      {
-        "html": "enforce",
-        "custom": "enforce",
-        "explicitSpread": "enforce",
-        "exceptions": ["Component", "App"]
-      }
-    ],
     "react/function-component-definition": [
       2,
       {
@@ -35,6 +26,8 @@
     "object-curly-newline": 0,
     "react/destructuring-assignment": 0,
     "camelcase": 0,
-    "react/jsx-props-no-spreading": 0
+    "react/jsx-props-no-spreading": 0,
+    "import/no-cycle": 0,
+    "max-len": ["error", { "code": 120 }]
   }
 }

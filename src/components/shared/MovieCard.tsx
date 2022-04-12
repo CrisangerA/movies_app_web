@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
-import { ButtonFavorites } from '@components/index';
 import { Movie } from '@models/index';
 import SCREEN_ROUTES from '@shared/screen.routes';
+import ButtonFavorites from './ButtonFavorites';
 import styles from './movieCard.module.css';
 
 const MovieCard: FC<Movie> = (props) => {

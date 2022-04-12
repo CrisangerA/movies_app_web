@@ -1,4 +1,5 @@
-import { DashboardLayout, About, Actors, Header } from '@components/index';
+import { About, Actors, Header } from '@components/detail';
+import { DashboardLayout } from '@components/shared';
 import { Movie, Actor } from '@models/index';
 import movieService from '@services/movie.service';
 import type { NextPage, NextPageContext } from 'next';
