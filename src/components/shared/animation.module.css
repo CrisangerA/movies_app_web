@@ -1,0 +1,18 @@
+.animated {
+  position: relative;
+  transition: 0.7s ease-out;
+}
+
+.left {
+  left: -100%;
+}
+.leftAnimated {
+  left: 0;
+}
+
+.right {
+  right: -100%;
+}
+.rightAnimated {
+  right: 0;
+}

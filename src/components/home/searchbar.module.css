@@ -5,7 +5,6 @@
 
 .searchbar {
   position: relative;
-  left: -100%;
   width: 100%;
   min-height: 30vh;
   background-color: #5ca4d4; /* secondary */
@@ -14,8 +13,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.7s ease-out;
-}
-.containerIn {
-  left: 0;
 }

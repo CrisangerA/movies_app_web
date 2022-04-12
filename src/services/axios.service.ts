@@ -1,4 +1,3 @@
-/* eslint-disable function-paren-newline */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-promise-executor-return */
@@ -22,7 +21,6 @@ class AxiosService {
   };
 
   rejectCallback = (reject: Function) => (err: AxiosError) => {
-    // console.log("_rejectCallback: ",err)
     const error = { message: '' };
     if (err.response?.status === 400) error.message = 'Error connecting to server';
     if (err.response?.status === 401) error.message = 'Unauthorized';

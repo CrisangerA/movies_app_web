@@ -1,12 +1,8 @@
-/* eslint-disable import/no-cycle */
-/* eslint-disable import/no-unresolved */
 import { FC } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import useFavorites from '@hooks/useFavorites';
+import Slider from '@components/shared/Slider';
+import Animation from '@components/shared/Animation';
 import { FavoriteItem } from './index';
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
 
 const FavoriteList: FC = () => {
   const { favorites } = useFavorites();
@@ -14,18 +10,13 @@ const FavoriteList: FC = () => {
   if (favorites.length === 0) return <h1>You dont have favorites</h1>;
 
   return (
-    <Swiper
-      spaceBetween={50}
-      slidesPerView={5}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
-      {favorites.map((id) => (
-        <SwiperSlide key={`Favorite-${id}`}>
-          <FavoriteItem id={id} />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <Animation from='left'>
+      <Slider spaceBetween={10} slidesPerView={5}>
+        {favorites.map((id) => (
+          <FavoriteItem key={`Favorite-${id}`} id={id} />
+        ))}
+      </Slider>
+    </Animation>
   );
 };
 

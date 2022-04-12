@@ -1,27 +1,19 @@
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable import/no-unresolved */
-import { FC, Fragment, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { MovieAPI } from '@models/index';
-import { MovieCard } from '@components/shared/index';
+import { MovieCard, Animation, Slider } from '@components/shared/index';
 import movieService from '@services/movie.service';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './recomended.module.css';
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
 
 const Recommended: FC<{ title: string; initialData?: MovieAPI; searchText?: string }> = ({
   title,
   searchText = '',
 }) => {
-  const [classes, setClasses] = useState([styles.animated]);
   const [controlledSwiper, setControlledSwiper] = useState<any>();
-
-  useEffect(() => {
-    setClasses((prev) => [...prev, styles.animatedIn]);
-  }, []);
 
   const resolveHandler = (pageParam: number | undefined) => {
     const cpage = `&page=${pageParam}`;
@@ -51,39 +43,34 @@ const Recommended: FC<{ title: string; initialData?: MovieAPI; searchText?: stri
   }, [searchText]);
 
   if (data === undefined) return <div />;
+
+  const movies = data?.pages.map((page) => page.results).reduce((prev, curr) => [...prev, ...curr]);
+
   return (
-    <div className={styles.container}>
-      <div className={classes.join(' ')}>
-        <h1 className={styles.title}>
-          {title}
-          {(isFetching || isLoading) && ' - Loading...'}
-        </h1>
-        <Swiper
-          spaceBetween={50}
-          slidesPerView={5}
-          preventClicks
-          onSwiper={(ctx) => setControlledSwiper(ctx)}
-          onReachEnd={() => {
-            fetchNextPage();
-          }}
-          className={styles.swiper}
-        >
-          {data?.pages?.map((page, i) => (
-            <Fragment key={i}>
-              {page.results.map((movie, index) => (
-                <SwiperSlide key={`Movie-${movie.id}`} className={styles.swiperSlide}>
-                  {index === page.results.length - 1 && isFetchingNextPage ? (
-                    <p>Loading...</p>
-                  ) : (
-                    <MovieCard {...movie} />
-                  )}
-                </SwiperSlide>
-              ))}
-            </Fragment>
-          ))}
-        </Swiper>
-      </div>
-    </div>
+    <Animation from='left'>
+      <h1 className={styles.title}>
+        {title}
+        {(isFetching || isLoading) && ' - Loading...'}
+      </h1>
+
+      <Slider
+        spaceBetween={0}
+        slidesPerView={6}
+        preventClicks
+        onSwiper={(ctx: any) => setControlledSwiper(ctx)}
+        onReachEnd={() => {
+          fetchNextPage();
+        }}
+      >
+        {movies.map((movie, index) =>
+          index === movies.length - 1 && isFetchingNextPage ? (
+            <p>Loading...</p>
+          ) : (
+            <MovieCard key={`Movie-${movie.id}`} {...movie} />
+          )
+        )}
+      </Slider>
+    </Animation>
   );
 };
 export default Recommended;

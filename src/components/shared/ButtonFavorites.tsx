@@ -7,7 +7,7 @@ const ButtonFavorites: FC<{ id: string }> = ({ id }) => {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const selected = isFavorite(id);
   return (
-    <button type='button' onClick={() => (selected ? removeFavorite(id) : addFavorite(id))}>
+    <button type='button' onClick={() => (selected ? removeFavorite(id) : addFavorite(id))} className={styles.button}>
       <div className={`${styles.container} ${selected ? styles.containerHeart : styles.containerStar}`}>
         <Image
           alt='Logo add favorite'

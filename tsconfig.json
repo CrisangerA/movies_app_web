@@ -24,6 +24,6 @@
       "@services/*": ["src/services/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Page.jsx", "src/components/shared/Slider.jsx"],
   "exclude": ["node_modules"]
 }

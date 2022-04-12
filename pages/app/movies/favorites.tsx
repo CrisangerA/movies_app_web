@@ -7,6 +7,7 @@ const Favorites: NextPage = () => (
     title='Movies App | My Favorites'
     description='The most complete website to know about your favorite movies'
   >
+    <h1>Your favorite movies</h1>
     <FavoriteList />
   </DashboardLayout>
 );
