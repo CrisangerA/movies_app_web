@@ -3,12 +3,13 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import CanvasService, { Cordinates, PoligonType, options } from '@services/canvas.service';
 import { useEffect, useRef, useState } from 'react';
+import { NextPage } from 'next';
+import CanvasService, { Cordinates, PoligonType, options } from '@services/canvas.service';
 
-const Canvas = () => {
+const Canvas: NextPage = () => {
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>();
-  const canvasRef = useRef<HTMLCanvasElement>();
+  const canvasRef = useRef<HTMLCanvasElement>() as React.MutableRefObject<HTMLCanvasElement>;
   // canvas service
   const [currentPoligon, setCurrentPoligon] = useState<PoligonType>('');
   const [currentCord, setCurrentCord] = useState(0);
