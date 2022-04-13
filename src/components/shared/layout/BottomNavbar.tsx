@@ -8,13 +8,13 @@ const BottomNavbar = () => (
     <div className={styles.child}>
       <Link href={SCREEN_ROUTES.movies.list} passHref>
         <div className={styles.icon}>
-          <Image src='/static/logos/icon-home.svg' alt='Icon from home' width={40} height={40} />
+          <Image src='/static/logos/icon-home.svg' alt='Icon home' width={40} height={40} />
           <p>Home</p>
         </div>
       </Link>
       <Link href={SCREEN_ROUTES.movies.favorites} passHref>
         <div className={styles.icon}>
-          <Image src='/static/logos/icon-favorites.svg' alt='Icon from home' width={40} height={40} />
+          <Image src='/static/logos/icon-favorites.svg' alt='Icon favorites' width={40} height={40} />
           <p>Favorites</p>
         </div>
       </Link>

@@ -7,7 +7,7 @@ import ButtonFavorites from './ButtonFavorites';
 import styles from './movieCard.module.css';
 
 const MovieCard: FC<Movie> = ({ id, title, poster_path, vote_average }) => (
-  <div className={styles.container}>
+  <div className={`MovieCard ${styles.container}`}>
     <Link href={SCREEN_ROUTES.movies.detail(id)} passHref>
       <Image
         alt={`Image to ${title}`}
