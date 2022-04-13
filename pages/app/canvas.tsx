@@ -1,57 +1,123 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { MouseEvent, MouseEventHandler, useEffect, useRef, useState } from 'react';
+import CanvasService, { Cordinates, PoligonType, options } from '@services/canvas.service';
+import { useEffect, useRef, useState } from 'react';
 
 const Canvas = () => {
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>();
   const canvasRef = useRef<HTMLCanvasElement>();
-  const [nlines, setNlines] = useState(1);
-  useEffect(() => {
+  // canvas service
+  const [currentPoligon, setCurrentPoligon] = useState<PoligonType>('');
+  const [currentCord, setCurrentCord] = useState(0);
+  const [lines, setLines] = useState<Cordinates[]>([]);
+
+  const handleClearCanvas = () => {
     setCtx(canvasRef.current?.getContext('2d'));
-  }, []);
+    setCurrentCord(0);
+    setLines([]);
+    ctx && ctx.clearRect(0, 0, 1000, 500);
+  };
+
+  useEffect(() => {
+    handleClearCanvas();
+  }, [currentPoligon]);
 
   useEffect(() => {
     if (ctx) {
-      ctx.fillStyle = '#FF0000'; // bg-color
-      ctx.fillRect(0, 0, 150, 75); // rectangle
-
-      ctx.moveTo(200, 100); // start point
-      ctx.lineTo(300, 150); // end point
-      ctx.stroke(); // draw line
+      // ctx.fillStyle = '#FF0000'; // bg-color
+      // ctx.fillRect(0, 0, 150, 75); // rectangle
+      // ctx.moveTo(200, 100); // start point
+      // ctx.lineTo(300, 150); // end point
+      // ctx.stroke(); // draw line
     }
   }, [ctx]);
 
-  const handleClick = (e: any) => {
-    // console.log('click: ', e.clientX, e.clientY);
-    const { clientX: x, clientY: y } = e;
-    ctx?.moveTo(x, y); // start point
-    ctx?.lineTo(x + 100, y + 100); // end point
+  const drawPoligon = (cords: Cordinates) => {
+    ctx?.beginPath();
+    ctx?.moveTo(cords.from.x, cords.from.y); // start point
+    ctx?.lineTo(cords.to.x, cords.to.y); // end point
     ctx?.stroke(); // draw line
-    // if (nlines === 1) {
-    //   ctx?.moveTo(400, 100); // start point
-    //   ctx?.lineTo(500, 200); // end point
-    //   ctx?.stroke(); // draw line
-    // }
-    // if (nlines === 2) {
-    //   ctx?.moveTo(500, 200); // start point
-    //   ctx?.lineTo(500, 400); // end point
-    //   ctx?.stroke(); // draw line
-    // }
-    // if (nlines === 3) {
-    //   ctx?.moveTo(500, 400); // start point
-    //   ctx?.lineTo(400, 100); // end point
-    //   ctx?.stroke(); // draw line
-    // }
-    // setNlines((prev) => prev + 1);
+    ctx?.closePath();
   };
-  const handleClearCanvas = () => ctx?.clearRect(0, 0, 1000, 500);
+
+  const handleClick = (e: any) => {
+    if (currentPoligon === '') return;
+    const { clientX: x, clientY: y } = e;
+    if (currentCord > 0 && lines.length === currentCord) return;
+    if (lines.length > 0) {
+      drawPoligon({
+        from: { x: lines[currentCord].from.x, y: lines[currentCord].from.y },
+        to: { x: lines[currentCord].to.x, y: lines[currentCord].to.y },
+      });
+    } else {
+      const c = new CanvasService({ x, y });
+      const cords = c.getPoligon(currentPoligon);
+      drawPoligon({
+        from: { x: cords[currentCord].from.x, y: cords[currentCord].from.y },
+        to: { x: cords[currentCord].to.x, y: cords[currentCord].to.y },
+      });
+      setLines(cords);
+    }
+    setCurrentCord((prev) => prev + 1);
+  };
+
+  const handleCompletePoligon = () => {
+    if (currentCord > 0) {
+      for (let i = currentCord; i < lines.length; i++) {
+        setCurrentCord((prev) => prev + 1);
+        const element = lines[i];
+        drawPoligon({
+          from: { x: element.from.x, y: element.from.y },
+          to: { x: element.to.x, y: element.to.y },
+        });
+      }
+    } else {
+      const c = new CanvasService();
+      const cords = c.getPoligon(currentPoligon);
+      cords.forEach((cord) => {
+        drawPoligon({
+          from: { x: cord.from.x, y: cord.from.y },
+          to: { x: cord.to.x, y: cord.to.y },
+        });
+      });
+    }
+  };
 
   return (
     <div>
-      <canvas ref={canvasRef} width='1000' height='500' style={{ border: '1px solid red' }} onClick={handleClick} />
-      <button type='button'>complete</button>
-      <button type='button' onClick={handleClearCanvas}>
-        clean
-      </button>
+      <div>
+        <canvas ref={canvasRef} width='400' height='400' style={{ border: '1px solid red' }} onClick={handleClick} />
+      </div>
+      <div>
+        <h1>To start drawing first select and poligon option</h1>
+        <button type='button' onClick={handleCompletePoligon}>
+          complete
+        </button>
+        <button type='button' onClick={handleClearCanvas}>
+          clean
+        </button>
+        <select onChange={(e) => setCurrentPoligon(e.target.value as PoligonType)} value={currentPoligon}>
+          <option value=''>None</option>
+          {options.map((opt) => (
+            <option key={`Opt-${opt}`} value={opt}>
+              {opt}
+            </option>
+          ))}
+        </select>
+        <div>
+          {currentPoligon && <h2>Poligon: {currentPoligon}</h2>}
+          {lines.length > 0 && (
+            <h2>
+              Lines: {currentCord}
+              {' of '}
+              {lines.length}
+            </h2>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
