@@ -48,6 +48,11 @@ yarn start
 - Dynamic import
 - Server Side Rendering and Static Rendering.
 
+
+## Gif
+![home js](https://user-images.githubusercontent.com/46910469/163309428-f85eb0f1-68eb-49a8-b4b5-680f1ebf94ed.gif)
+
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
