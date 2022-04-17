@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 export interface Input {
   x: number;
   y: number;
@@ -10,47 +11,54 @@ export type PoligonType = 'triangle' | 'cuadrado' | '';
 export const options: PoligonType[] = ['triangle', 'cuadrado'];
 
 class CanvasService {
-  input: Input;
-
   cordinates: Cordinates[];
 
-  constructor(input?: Input) {
-    if (input !== undefined) {
-      this.input = input;
-    } else {
-      this.input = { x: 100, y: 100 };
-    }
+  radio = 100;
+
+  center: Input = { x: 200, y: 200 };
+
+  numberOfLines: number;
+
+  constructor() {
     this.cordinates = [];
+    this.numberOfLines = Math.floor(Math.random() * (50 - 3)) + 3;
   }
 
-  getTriangle(): Cordinates[] {
-    const firstPoint = { x: this.input.x + 50, y: this.input.y + 60 };
-    const secondPoint = { x: firstPoint.x + 50, y: firstPoint.y - 60 };
-    this.cordinates = [
-      { from: this.input, to: firstPoint },
-      { from: firstPoint, to: secondPoint },
-      { from: secondPoint, to: this.input },
-    ];
+  generatePoligon(): Cordinates[] {
+    const side = (line: number) => (line * 2 * Math.PI) / this.numberOfLines;
+    const cos = (line: number) => Math.cos(side(line));
+    const sen = (line: number) => Math.sin(side(line));
+
+    const cordinates: Input[] = [];
+
+    for (let i = 0; i <= this.numberOfLines; i += 1) {
+      if (i === 0) {
+        cordinates.push({
+          x: this.center.x + this.radio * Math.cos(0),
+          y: this.center.y + this.radio * Math.sin(0),
+        });
+      } else {
+        cordinates.push({
+          x: this.center.x + this.radio * cos(i),
+          y: this.center.y + this.radio * sen(i),
+        });
+      }
+    }
+
+    return this.convertInputToCordinates(cordinates);
+  }
+
+  convertInputToCordinates(input: Input[]): Cordinates[] {
+    this.cordinates = input
+      .map(
+        (cord, i) =>
+          i !== input.length - 1 && {
+            from: { x: cord.x, y: cord.y },
+            to: { x: input[i + 1].x, y: input[i + 1].y },
+          }
+      )
+      .filter((cord) => cord !== false) as Cordinates[];
     return this.cordinates;
-  }
-
-  getCuadrado(): Cordinates[] {
-    const firstPoint = { x: this.input.x + 100, y: this.input.y };
-    const secondPoint = { x: firstPoint.x, y: firstPoint.y + 100 };
-    const thirdPoint = { x: this.input.x, y: secondPoint.y };
-    this.cordinates = [
-      { from: this.input, to: firstPoint },
-      { from: firstPoint, to: secondPoint },
-      { from: secondPoint, to: thirdPoint },
-      { from: thirdPoint, to: this.input },
-    ];
-    return this.cordinates;
-  }
-
-  getPoligon(name: PoligonType): Cordinates[] {
-    if (name === 'triangle') return this.getTriangle();
-    if (name === 'cuadrado') return this.getCuadrado();
-    return [];
   }
 }
 
